@@ -8,7 +8,8 @@ use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class KernelAwareInitializer implements EventSubscriberInterface, ContextInitializer {
+class KernelAwareInitializer implements EventSubscriberInterface, ContextInitializer
+{
 
     /**
      * @var object
@@ -31,7 +32,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     public static function getSubscribedEvents()
     {
         return [
-            ScenarioTested::AFTER => ['rebootKernel', -15]
+            ScenarioTested::AFTER => ['rebootKernel', - 15]
         ];
     }
 
@@ -60,7 +61,11 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
      */
     public function rebootKernel()
     {
-        // TODO - Anything @AfterScenario related?
+        // TODO: Find better place for this.
+
+        $app = require $this->kernel->basePath() . '/bootstrap/app.php';
+
+        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
     }
 
 }
