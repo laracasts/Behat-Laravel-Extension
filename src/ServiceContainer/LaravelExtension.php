@@ -111,7 +111,7 @@ class LaravelExtension implements Extension
         $definition = new Definition('Laracasts\Behat\Context\KernelAwareInitializer', [$app]);
 
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
-        $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));
+        $definition->addTag(ContextExtension::INITIALIZER_TAG, ['priority' => 0]);
 
         $container->setDefinition('laravel.initializer', $definition);
     }
