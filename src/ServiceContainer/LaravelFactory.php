@@ -47,6 +47,11 @@ class LaravelFactory implements DriverFactory
         ]);
     }
 
+    /**
+     * Ensure that BrowserKit is available.
+     *
+     * @throws RuntimeException
+     */
     private function guardAgainstMissingBrowserKitDriver()
     {
         if ( ! class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
