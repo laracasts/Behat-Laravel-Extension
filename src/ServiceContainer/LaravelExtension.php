@@ -46,7 +46,13 @@ class LaravelExtension implements Extension
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-        $builder->useAttributeAsKey('name')->prototype('variable');
+        $builder
+            ->children()
+                ->scalarNode('bootstrap_path')
+                    ->defaultValue('foobar')
+                ->end()
+                ->scalarNode('env_path')
+                    ->defaultValue('.env.behat');
     }
 
     /**
@@ -66,7 +72,7 @@ class LaravelExtension implements Extension
      */
     private function loadApplication(ContainerBuilder $container, array $config)
     {
-        $app = require __DIR__ . '/../../bootstrap/app.php';
+        $app = require __DIR__ . '/../../../../../bootstrap/app.php';
 
         $app->loadEnvironmentFrom($config['env_path']);
 
