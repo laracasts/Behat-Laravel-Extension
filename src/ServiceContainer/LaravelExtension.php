@@ -82,7 +82,7 @@ class LaravelExtension implements Extension
      */
     private function loadInitializer(ContainerBuilder $container)
     {
-        $definition = new Definition('KernelAwareInitializer', [
+        $definition = new Definition('Laracasts\Behat\Context\KernelAwareInitializer', [
             new Reference('laravel.app')
         ]);
 
