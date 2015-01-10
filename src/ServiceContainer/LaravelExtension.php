@@ -49,7 +49,7 @@ class LaravelExtension implements Extension
         $builder
             ->children()
                 ->scalarNode('bootstrap_path')
-                    ->defaultValue('foobar')
+                    ->defaultValue('bootstrap/app.php')
                 ->end()
                 ->scalarNode('env_path')
                     ->defaultValue('.env.behat');
@@ -72,7 +72,9 @@ class LaravelExtension implements Extension
      */
     private function loadApplication(ContainerBuilder $container, array $config)
     {
-        $app = require __DIR__ . '/../../../../../bootstrap/app.php';
+        $bootstrapPath = $container->getParameter('paths.base') . '/bootstrap/app.php';
+
+        $app = require $bootstrapPath;
 
         $app->loadEnvironmentFrom($config['env_path']);
 
