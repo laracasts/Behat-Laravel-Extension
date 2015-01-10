@@ -66,8 +66,8 @@ class LaravelExtension implements Extension
     /**
      * Boot up Laravel.
      *
-     * @param  ContainerBuilder    $container
-     * @param  array               $config
+     * @param  ContainerBuilder $container
+     * @param  array            $config
      * @return HttpKernelInterface
      */
     private function loadApplication(ContainerBuilder $container, array $config)
