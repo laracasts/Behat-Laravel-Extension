@@ -72,7 +72,11 @@ class LaravelExtension implements Extension
      */
     private function loadApplication(ContainerBuilder $container, array $config)
     {
-        $app = require $container->getParameter('paths.base') . '/bootstrap/app.php';
+        $bootstrapPath = $container->getParameter('paths.base') . '/' . $config['bootstrap_path'];
+
+        $this->guardAgainstMissingBootstrapPath($bootstrapPath);
+
+        $app = require $bootstrapPath;
 
         $app->loadEnvironmentFrom($config['env_path']);
 
@@ -81,6 +85,19 @@ class LaravelExtension implements Extension
         $container->set('laravel.app', $app);
 
         return $app;
+    }
+
+    /**
+     * Ensure that the provided Laravel bootstrap path exists.
+     *
+     * @param string $path
+     * @throws RuntimeException
+     */
+    private function guardAgainstMissingBootstrapPath($path)
+    {
+        if ( ! file_exists($path)) {
+            throw new RuntimeException('Could not locate the path to the Laravel bootstrap file.');
+        }
     }
 
     /**
