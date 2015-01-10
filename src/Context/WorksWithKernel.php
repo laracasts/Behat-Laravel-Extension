@@ -1,10 +1,15 @@
 <?php
 
+namespace Laracasts\Behat\Context;
+
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-trait WorksWithKernel {
+trait WorksWithKernel
+{
 
     /**
+     * The Laravel application.
+     *
      * @var HttpKernelInterface
      */
     protected $kernel;
