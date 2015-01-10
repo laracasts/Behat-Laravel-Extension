@@ -16,12 +16,13 @@
         }
     },
     "require": {
-        "behat/mink-extension": "~2.0",
-        "behat/mink-browserkit-driver": "~1.2",
+        "php": ">=5.4",
         "behat/behat": "~3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",
-        "symfony/symfony": "~2.6"
+        "symfony/symfony": "~2.6",
+        "behat/mink-browserkit-driver": "~1.2",
+        "behat/mink-extension": "~2.0"
     }
 }
