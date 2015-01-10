@@ -31,7 +31,7 @@ class LaravelFactory implements DriverFactory
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-        // TODO: What should go here?
+        //
     }
 
     /**
@@ -39,16 +39,21 @@ class LaravelFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
-        if ( ! class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
-            throw new RuntimeException(
-                'Install MinkBrowserKitDriver in order to use the laravel driver.'
-            );
-        }
+        $this->guardAgainstMissingBrowserKitDriver();
 
         return new Definition('Laracasts\Behat\Driver\KernelDriver', [
             new Reference('laravel.app'),
             '%mink.base_url%'
         ]);
+    }
+
+    private function guardAgainstMissingBrowserKitDriver()
+    {
+        if ( ! class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
+            throw new RuntimeException(
+                'Install MinkBrowserKitDriver in order to use the laravel driver.'
+            );
+        }
     }
 
 }
