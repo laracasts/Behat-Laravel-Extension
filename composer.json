@@ -1,0 +1,27 @@
+{
+    "name": "laracasts/behat-laravel-extension",
+    "type": "behat-extension",
+    "description": "Laravel extension for Behat",
+    "keywords": ["laravel", "behat", "extension", "bdd"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JeffreyWay",
+            "email": "jeffrey@laracasts.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laracasts\\Behat\\": "src"
+        }
+    },
+    "require": {
+        "behat/mink-extension": "~2.0",
+        "behat/mink-browserkit-driver": "~1.2",
+        "behat/behat": "~3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "symfony/symfony": "~2.6"
+    }
+}
