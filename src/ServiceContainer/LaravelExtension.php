@@ -59,39 +59,39 @@ class LaravelExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $this->loadApplication($container, $config);
-        $this->loadInitializer($container);
+        $app = $this->loadApplication($container, $config);
+        $this->loadInitializer($container, $app);
     }
 
     /**
      * Boot up Laravel.
      *
-     * @param ContainerBuilder $container
-     * @param array            $config
+     * @param  ContainerBuilder    $container
+     * @param  array               $config
+     * @return HttpKernelInterface
      */
     private function loadApplication(ContainerBuilder $container, array $config)
     {
-        $bootstrapPath = $container->getParameter('paths.base') . '/bootstrap/app.php';
-
-        $app = require $bootstrapPath;
+        $app = require $container->getParameter('paths.base') . '/bootstrap/app.php';
 
         $app->loadEnvironmentFrom($config['env_path']);
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
-        $container->register('laravel.app', $app);
+        $container->set('laravel.app', $app);
+
+        return $app;
     }
 
     /**
      * Load the initializer.
      *
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder    $container
+     * @param HttpKernelInterface $app
      */
-    private function loadInitializer(ContainerBuilder $container)
+    private function loadInitializer(ContainerBuilder $container, $app)
     {
-        $definition = new Definition('Laracasts\Behat\Context\KernelAwareInitializer', [
-            new Reference('laravel.app')
-        ]);
+        $definition = new Definition('Laracasts\Behat\Context\KernelAwareInitializer', [$app]);
 
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
         $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));

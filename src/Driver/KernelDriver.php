@@ -17,9 +17,6 @@ class KernelDriver extends BrowserKitDriver
      */
     public function __construct(HttpKernelInterface $app, $baseUrl = null)
     {
-        // TODO: No idea why this needs to be here in order to work...
-        require __DIR__ . '/../../bootstrap/app.php';
-
         parent::__construct(new Client($app), $baseUrl);
     }
 
