@@ -10,7 +10,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-use Laracasts\Behat\ServiceContainer\LaravelFactory;
 
 class LaravelExtension implements Extension
 {
