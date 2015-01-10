@@ -32,7 +32,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     public static function getSubscribedEvents()
     {
         return [
-            ScenarioTested::AFTER => ['rebootKernel', - 15]
+            ScenarioTested::AFTER => ['rebootKernel', -15]
         ];
     }
 
