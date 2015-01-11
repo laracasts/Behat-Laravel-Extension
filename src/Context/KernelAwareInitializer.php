@@ -5,6 +5,7 @@ namespace Laracasts\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
+use Laracasts\Behat\ServiceContainer\LaravelBooter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -12,9 +13,18 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
 {
 
     /**
-     * @var object
+     * The app kernel.
+     *
+     * @var HttpKernelInterface
      */
     private $kernel;
+
+    /**
+     * The Behat context.
+     *
+     * @var Context
+     */
+    private $context;
 
     /**
      * Construct the initializer.
@@ -41,31 +51,35 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
      */
     public function initializeContext(Context $context)
     {
-        if ( ! $context instanceof KernelAwareContext) {
-            return;
-        }
+        $this->context = $context;
 
-        $context->setKernel($this->kernel);
+        $this->setKernelOnContext($this->kernel);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function supportsContext(Context $context)
-    {
-        return true;
-    }
-
-    /**
+     * Set the app kernel to the feature context.
      *
+     * @param HttpKernelInterface $kernel
+     */
+    private function setKernelOnContext(HttpKernelInterface $kernel)
+    {
+        if ($this->context instanceof KernelAwareContext) {
+            $this->context->setKernel($kernel);
+        }
+    }
+
+    /**
+     * After each scenario, reboot the kernel.
      */
     public function rebootKernel()
     {
-        // TODO: Find better place for this.
+        $this->kernel->flush();
 
-        $app = require $this->kernel->basePath() . '/bootstrap/app.php';
+        $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile());
 
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+        $this->setKernelOnContext($app = $laravel->boot());
+
+        $this->context->getSession()->getDriver()->reboot($app);
     }
 
 }

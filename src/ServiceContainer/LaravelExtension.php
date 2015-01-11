@@ -9,7 +9,6 @@ use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 class LaravelExtension implements Extension
 {
@@ -59,58 +58,25 @@ class LaravelExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $app = $this->loadApplication($container, $config);
+        $app = $this->loadLaravel($container, $config);
+
         $this->loadInitializer($container, $app);
     }
 
     /**
      * Boot up Laravel.
      *
-     * @param  ContainerBuilder $container
-     * @param  array            $config
-     * @return HttpKernelInterface
-     */
-    private function loadApplication(ContainerBuilder $container, array $config)
-    {
-        $app = $this->requireLaravelBootstrap($container, $config);
-
-        $app->loadEnvironmentFrom($config['env_path']);
-
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
-
-        $container->set('laravel.app', $app);
-
-        return $app;
-    }
-
-    /**
-     * Require Laravel's bootstrap file.
-     *
      * @param ContainerBuilder $container
      * @param array            $config
      * @return mixed
-     * @throws RuntimeException
      */
-    private function requireLaravelBootstrap(ContainerBuilder $container, array $config)
+    private function loadLaravel(ContainerBuilder $container, array $config)
     {
-        $bootstrapPath = $container->getParameter('paths.base') . '/' . $config['bootstrap_path'];
+        $laravel = new LaravelBooter($container->getParameter('paths.base'), $config['env_path']);
 
-        $this->guardAgainstMissingBootstrapPath($bootstrapPath);
+        $container->set('laravel.app', $app = $laravel->boot());
 
-        return require $bootstrapPath;
-    }
-
-    /**
-     * Ensure that the provided Laravel bootstrap path exists.
-     *
-     * @param string $path
-     * @throws RuntimeException
-     */
-    private function guardAgainstMissingBootstrapPath($path)
-    {
-        if ( ! file_exists($path)) {
-            throw new RuntimeException('Could not locate the path to the Laravel bootstrap file.');
-        }
+        return $app;
     }
 
     /**
