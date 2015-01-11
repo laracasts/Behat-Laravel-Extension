@@ -39,7 +39,7 @@ class LaravelFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
-        $this->guardAgainstMissingBrowserKitDriver();
+        $this->assertBrowserkitIsAvailable();
 
         return new Definition('Laracasts\Behat\Driver\KernelDriver', [
             new Reference('laravel.app'),
@@ -52,7 +52,7 @@ class LaravelFactory implements DriverFactory
      *
      * @throws RuntimeException
      */
-    private function guardAgainstMissingBrowserKitDriver()
+    private function assertBrowserkitIsAvailable()
     {
         if ( ! class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
             throw new RuntimeException(
