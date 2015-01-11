@@ -29,7 +29,7 @@ trait App
      *
      * @return mixed
      */
-    public function getApp()
+    public function app()
     {
         return $this->app;
     }
