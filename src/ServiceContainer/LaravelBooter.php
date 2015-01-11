@@ -63,7 +63,7 @@ class LaravelBooter
     {
         $bootstrapPath = $this->basePath() . '/bootstrap/app.php';
 
-        $this->guardAgainstMissingBootstrapPath($bootstrapPath);
+        $this->assertBootstrapFileExists($bootstrapPath);
 
         $app = require $bootstrapPath;
 
@@ -80,7 +80,7 @@ class LaravelBooter
      * @param string $bootstrapPath
      * @throws RuntimeException
      */
-    private function guardAgainstMissingBootstrapPath($bootstrapPath)
+    private function assertBootstrapFileExists($bootstrapPath)
     {
         if ( ! file_exists($bootstrapPath)) {
             throw new RuntimeException('Could not locate the path to the Laravel bootstrap file.');
