@@ -21,7 +21,7 @@ class KernelDriver extends BrowserKitDriver
     }
 
     /**
-     * Reboot the Kernel.
+     * Refresh the driver.
      *
      * @param HttpKernelInterface $app
      * @return KernelDriver
