@@ -53,16 +53,16 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     {
         $this->context = $context;
 
-        $this->setKernelOnContext($this->kernel);
+        $this->setAppOnContext($this->kernel);
     }
 
     /**
      * Set the app kernel to the feature context.
      */
-    private function setKernelOnContext()
+    private function setAppOnContext()
     {
         if ($this->context instanceof KernelAwareContext) {
-            $this->context->setKernel($this->kernel);
+            $this->context->setApp($this->kernel);
         }
     }
 
@@ -77,7 +77,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
 
         $this->context->getSession()->getDriver()->reboot($this->kernel = $laravel->boot());
 
-        $this->setKernelOnContext();
+        $this->setAppOnContext();
     }
 
 }

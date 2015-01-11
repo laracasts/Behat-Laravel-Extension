@@ -4,7 +4,7 @@ namespace Laracasts\Behat\Context;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-trait WorksWithKernel
+trait App
 {
 
     /**
@@ -12,16 +12,16 @@ trait WorksWithKernel
      *
      * @var HttpKernelInterface
      */
-    protected $kernel;
+    protected $app;
 
     /**
      * Set the application.
      *
-     * @param HttpKernelInterface $kernel
+     * @param HttpKernelInterface $app
      */
-    public function setKernel(HttpKernelInterface $kernel)
+    public function setApp(HttpKernelInterface $app)
     {
-        $this->kernel = $kernel;
+        $this->app = $app;
     }
 
     /**
@@ -29,9 +29,9 @@ trait WorksWithKernel
      *
      * @return mixed
      */
-    public function getKernel()
+    public function getApp()
     {
-        return $this->kernel;
+        return $this->app;
     }
 
 }

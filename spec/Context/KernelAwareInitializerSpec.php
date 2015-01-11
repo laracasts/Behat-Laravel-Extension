@@ -35,7 +35,7 @@ class KernelAwareInitializerSpec extends ObjectBehavior
         KernelAwareContext $context,
         HttpKernelInterface $kernel
     ) {
-        $context->setKernel($kernel)->shouldBeCalled();
+        $context->setApp($kernel)->shouldBeCalled();
 
         $this->initializeContext($context);
     }

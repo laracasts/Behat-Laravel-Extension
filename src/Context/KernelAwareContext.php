@@ -14,6 +14,6 @@ interface KernelAwareContext extends Context
      * @param HttpKernelInterface $kernel
      * @return mixed
      */
-    public function setKernel(HttpKernelInterface $kernel);
+    public function setApp(HttpKernelInterface $kernel);
 
 }
