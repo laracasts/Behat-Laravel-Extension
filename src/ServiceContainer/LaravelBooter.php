@@ -2,6 +2,8 @@
 
 namespace Laracasts\Behat\ServiceContainer;
 
+use RuntimeException;
+
 class LaravelBooter
 {
 
