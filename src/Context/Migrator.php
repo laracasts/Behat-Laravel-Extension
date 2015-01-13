@@ -8,7 +8,7 @@ trait Migrator
 {
 
     /**
-     * Migrat the databse before each scenario.
+     * Migrate the database before each scenario.
      *
      * @beforeScenario
      */
