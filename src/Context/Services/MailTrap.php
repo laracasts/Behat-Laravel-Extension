@@ -54,7 +54,9 @@ trait MailTrap
     {
         $this->applyMailTrapConfiguration($inboxId);
 
-        return $this->requestClient()->get("/api/v1/inboxes/{$this->mailTrapInboxId}/messages")->json();
+        return $this->requestClient()->get(
+            "/api/v1/inboxes/{$this->mailTrapInboxId}/messages"
+        )->json();
     }
 
     /**
