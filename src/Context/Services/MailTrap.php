@@ -3,6 +3,7 @@
 namespace Laracasts\Behat\Context\Services;
 
 use GuzzleHttp\Client;
+use Config;
 use Exception;
 
 trait MailTrap
