@@ -36,7 +36,7 @@ trait MailTrap
         }
 
         if (is_null($config = Config::get('services.mailtrap'))) {
-            $message = 'Please set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."';
+            $message = 'Set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."';
 
             throw new Exception($message);
         }
