@@ -11,7 +11,7 @@ trait MailTrap
     /**
      * The MailTrap configuration.
      *
-     * @var array
+     * @var integer
      */
     protected $mailTrapInboxId;
 
@@ -35,9 +35,9 @@ trait MailTrap
         }
 
         if (is_null($config = Config::get('services.mailtrap'))) {
-            throw new Exception(
-                'You must set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."'
-            );
+            $message = 'Please set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."';
+
+            throw new Exception($message);
         }
 
         $this->mailTrapInboxId = $inboxId ?: $config['default_inbox'];
