@@ -1,10 +1,10 @@
 This extension offers an incredibly simple (and fast) way to begin testing and driving your Laravel applications with Behat. Some benefits include:
 
-- It doesn't depend on anything like Goutte, so it offers a super-fast way to test your UI. You don't even need to setup a host to run your tests.
-- Laravel is automatically rebooted after each scenario (so nothing like user sessions will be persisted).
-- Specifying custom environment files (like the `.env` one) for different app environments is a little tricky in Laravel 5. This extension handles that for you automatically. By default, it'll look for a `.env.behat` file in your project root.
-- You instantly have access to Laravel (things like facades and such) from your `FeatureContext` file.
-- A number of useful traits are available, which will speed up your workflow.
+- **Fast:** It doesn't depend on anything like Goutte, so it offers a super-fast way to test your UI. You don't even need to setup a host to run your tests.
+- **Refresh:** Laravel is automatically rebooted after each scenario (so nothing like user sessions will be persisted).
+- **Environments:** Specifying custom environment files (like the `.env` one) for different app environments is a little tricky in Laravel 5. This extension handles that for you automatically. By default, it'll look for a `.env.behat` file in your project root.
+- **Access Laravel:** You instantly have access to Laravel (things like facades and such) from your `FeatureContext` file.
+- **Workflow:** A number of useful traits are available, which will speed up your workflow.
 
 To get started, you only need to follow a few steps:
 
