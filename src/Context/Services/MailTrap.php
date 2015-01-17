@@ -24,12 +24,19 @@ trait MailTrap
     protected $mailTrapApiKey;
 
     /**
+     * The Guzzle client.
+     *
+     * @var Client
+     */
+    protected $client;
+
+    /**
      * Get the configuration for MailTrap.
      *
      * @param integer|null $inboxId
      * @throws Exception
      */
-    public function applyMailTrapConfiguration($inboxId = null)
+    protected function applyMailTrapConfiguration($inboxId = null)
     {
         if (is_null($config = Config::get('services.mailtrap'))) {
             throw new Exception(
@@ -47,7 +54,7 @@ trait MailTrap
      * @param null $inboxId
      * @return mixed
      */
-    public function fetchInbox($inboxId = null)
+    protected function fetchInbox($inboxId = null)
     {
         if ( ! $this->alreadyConfigured()) {
             $this->applyMailTrapConfiguration($inboxId);
@@ -64,7 +71,7 @@ trait MailTrap
      *
      * @AfterScenario @mail
      */
-    public function emptyInbox()
+    protected function emptyInbox()
     {
         $this->requestClient()->patch(
             "/api/v1/inboxes/{$this->mailTrapInboxId}/clean", ['future' => true]
@@ -88,12 +95,16 @@ trait MailTrap
      */
     protected function requestClient()
     {
-        return new Client([
-            'base_url' => 'https://mailtrap.io',
-            'defaults' => [
-                'headers' => ['Api-Token' => $this->mailTrapApiKey]
-            ]
-        ]);
+        if ( ! $this->client) {
+            $this->client = new Client([
+                'base_url' => 'https://mailtrap.io',
+                'defaults' => [
+                    'headers' => ['Api-Token' => $this->mailTrapApiKey]
+                ]
+            ]);
+        }
+
+        return $this->client;
     }
 
 }
