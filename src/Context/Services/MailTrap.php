@@ -60,9 +60,9 @@ trait MailTrap
             $this->applyMailTrapConfiguration($inboxId);
         }
 
-        return $this->requestClient()->get(
-            "/api/v1/inboxes/{$this->mailTrapInboxId}/messages"
-        )->json();
+        return $this->requestClient()
+            ->get($this->getMailTrapMessagesUrl())
+            ->json();
     }
 
     /**
@@ -73,9 +73,27 @@ trait MailTrap
      */
     protected function emptyInbox()
     {
-        $this->requestClient()->patch(
-            "/api/v1/inboxes/{$this->mailTrapInboxId}/clean", ['future' => true]
-        );
+        $this->requestClient()->patch($this->getMailTrapCleanUrl(), ['future' => true]);
+    }
+
+    /**
+     * Get the MailTrap messages endpoint.
+     *
+     * @return string
+     */
+    protected function getMailTrapMessagesUrl()
+    {
+        return "/api/v1/inboxes/{$this->mailTrapInboxId}/messages";
+    }
+
+    /**
+     * Get the MailTrap "empty inbox" endpoint.
+     * 
+     * @return string
+     */
+    protected function getMailTrapCleanUrl()
+    {
+        return "/api/v1/inboxes/{$this->mailTrapInboxId}/clean";
     }
 
     /**
