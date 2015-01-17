@@ -51,7 +51,7 @@ trait MailTrap
     /**
      * Fetch a MailTrap inbox.
      *
-     * @param null $inboxId
+     * @param  integer|null $inboxId
      * @return mixed
      */
     protected function fetchInbox($inboxId = null)
@@ -88,7 +88,7 @@ trait MailTrap
 
     /**
      * Get the MailTrap "empty inbox" endpoint.
-     * 
+     *
      * @return string
      */
     protected function getMailTrapCleanUrl()
