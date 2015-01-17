@@ -31,10 +31,6 @@ trait MailTrap
      */
     public function applyMailTrapConfiguration($inboxId = null)
     {
-        if ($this->alreadyConfigured()) {
-            return;
-        }
-
         if (is_null($config = Config::get('services.mailtrap'))) {
             $message = 'Set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."';
 
@@ -53,7 +49,9 @@ trait MailTrap
      */
     public function fetchInbox($inboxId = null)
     {
-        $this->applyMailTrapConfiguration($inboxId);
+        if ( ! $this->alreadyConfigured()) {
+            $this->applyMailTrapConfiguration($inboxId);
+        }
 
         return $this->requestClient()->get(
             "/api/v1/inboxes/{$this->mailTrapInboxId}/messages"
