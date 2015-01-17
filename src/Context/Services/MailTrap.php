@@ -32,9 +32,9 @@ trait MailTrap
     public function applyMailTrapConfiguration($inboxId = null)
     {
         if (is_null($config = Config::get('services.mailtrap'))) {
-            $message = 'Set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."';
-
-            throw new Exception($message);
+            throw new Exception(
+                'Set "secret" and "default_inbox" keys for "mailtrap" in "config/services.php."'
+            );
         }
 
         $this->mailTrapInboxId = $inboxId ?: $config['default_inbox'];
