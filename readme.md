@@ -1,4 +1,12 @@
-This extension offers you an incredibly simple (and fast) way to begin testing and driving your Laravel applications with Behat. You only need to follow a few steps:
+This extension offers an incredibly simple (and fast) way to begin testing and driving your Laravel applications with Behat. Some benefits include:
+
+- It doesn't depend on anything like Goutte, so it offers a super-fast way to test your UI. You don't even need to setup a host to run your tests.
+- Laravel is automatically rebooted after each scenario (so nothing like user sessions will be persisted).
+- Specifying custom environment files (like the `.env` one) for different app environments is a little tricky in Laravel 5. This extension handles that for you automatically. By default, it'll look for a `.env.behat` file in your project root.
+- You instantly have access to Laravel (things like facades and such) from your `FeatureContext` file.
+- A number of useful traits are available, which will speed up your workflow.
+
+To get started, you only need to follow a few steps:
 
 # 1. Install Dependencies
 
@@ -59,7 +67,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 
 That's it! The trait will do the rest; before each scenario runs, if your database needs to be migrated, it will be!
 
-### Databae Transactions
+### Database Transactions
 
 On the other hand, you might prefer to run all of your tests through database transactions. You'll get a nice speed boost out of the deal, as your data will never actually be saved to the database. To take advantage of this, once again, pull in the `Laracasts\Behat\Context\DatabaseTransactions` trait, like so:
 
