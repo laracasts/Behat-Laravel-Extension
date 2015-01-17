@@ -8,6 +8,8 @@ This extension offers an incredibly simple (and fast) way to begin testing and d
 
 To get started, you only need to follow a few steps:
 
+> Prefer a video walk-through? [See this lesson from Laracasts](https://laracasts.com/lessons/laravel-5-and-behat-bffs).
+
 # 1. Install Dependencies
 
 As always, we need to pull in some dependencies through Composer.
@@ -51,8 +53,6 @@ As a convenience, this package also includes a number of traits to streamline co
 
 Often, you'll find yourself in situations where you want to migrate your test database before a scenario. Easy! Just pull in the `Laracasts\Behat\Context\Migrator` trait into your `FeatureContext`, like so:
 
-<?php
-
 ```php
 // ...
 
@@ -65,7 +65,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 }
 ```
 
-That's it! The trait will do the rest; before each scenario runs, if your database needs to be migrated, it will be!
+That's it! The trait will do the rest. Before each scenario runs, if your database needs to be migrated, it will be!
 
 ### Database Transactions
 
@@ -133,6 +133,6 @@ Notice that call to `fetchInbox()`? That will send an API request to MailTrap, w
 $lastEmail = $this->fetchInbox()[0];
 ```
 
-If working along, you can dump that variable to see all of the various fields that you write assertions against. In the example above, we're ensuring that the subject was set correctly, and that the body of the email matches a stub that we've created.
+If working along, you can dump that variable to see all of the various fields that you may write assertions against. In the example above, we're ensuring that the subject was set correctly, and the body of the email matches a stub that we've created.
 
 Even better, after each scenario completes, we'll go ahead and empty out your MailTrap inbox for convenience.
