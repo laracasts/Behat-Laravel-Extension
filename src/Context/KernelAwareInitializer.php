@@ -75,7 +75,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
 
         $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile());
 
-        $this->context->getSession()->getDriver()->reboot($this->kernel = $laravel->boot());
+        $this->context->getSession('laravel')->getDriver()->reboot($this->kernel = $laravel->boot());
 
         $this->setAppOnContext();
     }
