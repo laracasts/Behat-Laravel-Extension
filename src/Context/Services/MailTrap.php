@@ -71,7 +71,7 @@ trait MailTrap
      *
      * @AfterScenario @mail
      */
-    protected function emptyInbox()
+    public function emptyInbox()
     {
         $this->requestClient()->patch($this->getMailTrapCleanUrl(), ['future' => true]);
     }
