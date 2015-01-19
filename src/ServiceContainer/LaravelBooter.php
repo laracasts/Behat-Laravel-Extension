@@ -22,15 +22,24 @@ class LaravelBooter
     private $environmentFile;
 
     /**
+     * The application's bootstrap file.
+     *
+     * @var string
+     */
+    private $bootstrapFile;
+
+    /**
      * Create a new Laravel booter instance.
      *
      * @param        $basePath
      * @param string $environmentFile
+     * @param string $bootstrapFile
      */
-    public function __construct($basePath, $environmentFile = '.env.behat')
+    public function __construct($basePath, $environmentFile = '.env.behat', $bootstrapFile = 'bootstrap/app.php')
     {
         $this->basePath = $basePath;
         $this->environmentFile = $environmentFile;
+        $this->bootstrapFile = $bootstrapFile;
     }
 
     /**
@@ -53,6 +62,15 @@ class LaravelBooter
         return $this->environmentFile;
     }
 
+    /**
+     * Get the applications bootstrap file.
+     *
+     * @return string
+     */
+    public function bootstrapFile()
+    {
+        return ltrim($this->bootstrapFile, '/');
+    }
 
     /**
      * Boot the app.
@@ -61,7 +79,8 @@ class LaravelBooter
      */
     public function boot()
     {
-        $bootstrapPath = $this->basePath() . '/bootstrap/app.php';
+        $bootstrapFile = $this->bootstrapFile();
+        $bootstrapPath = $this->basePath() . "/$bootstrapFile";
 
         $this->assertBootstrapFileExists($bootstrapPath);
 

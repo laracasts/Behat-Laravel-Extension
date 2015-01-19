@@ -27,13 +27,22 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     private $context;
 
     /**
+     * Behat config.
+     *
+     * @var array
+     */
+    private $config;
+
+    /**
      * Construct the initializer.
      *
      * @param HttpKernelInterface $kernel
+     * @param array               $config
      */
-    public function __construct(HttpKernelInterface $kernel)
+    public function __construct(HttpKernelInterface $kernel, array $config)
     {
         $this->kernel = $kernel;
+        $this->config = $config;
     }
 
     /**
@@ -73,7 +82,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     {
         $this->kernel->flush();
 
-        $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile());
+        $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile(), $this->config['bootstrap_path']);
 
         $this->context->getSession('laravel')->getDriver()->reboot($this->kernel = $laravel->boot());
 

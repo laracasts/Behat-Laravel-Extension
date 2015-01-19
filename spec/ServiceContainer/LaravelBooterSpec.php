@@ -9,7 +9,7 @@ class LaravelBooterSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(__DIR__, '.env.foo');
+        $this->beConstructedWith(__DIR__, '.env.foo', '/bootstrap/app.php');
     }
 
     function it_is_initializable()
@@ -25,6 +25,11 @@ class LaravelBooterSpec extends ObjectBehavior
     function it_knows_the_environment_file()
     {
         $this->environmentFile()->shouldBe('.env.foo');
+    }
+
+    function it_knows_the_bootstrap_file()
+    {
+        $this->bootstrapFile()->shouldBe('bootstrap/app.php');
     }
 
     function it_takes_exception_with_a_missing_bootstrap_file()
