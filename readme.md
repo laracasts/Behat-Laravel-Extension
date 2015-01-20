@@ -41,7 +41,7 @@ for your tests (such as a special acceptance test-specific database).
 
 ![example](https://dl.dropboxusercontent.com/u/774859/Work/BehatLaravelExtension/example.png)
 
-You're all set to go! Start writing some features. If you want a quick dummy example to get you started, refer to [this project](https://github.com/laracasts/Behat-Laravel-Extension).
+You're all set to go! Start writing some features. If you want a quick dummy example to get you started, refer to [this project](https://github.com/laracasts/Behat-Laravel-Extension-Example-App).
 
 > Note: if you want to leverage some of the Mink helpers in your `FeatureContext` file, then be sure to extend `Behat\MinkExtension\Context\MinkContext`.
 
