@@ -13,7 +13,8 @@ class KernelAwareInitializerSpec extends ObjectBehavior
 
     function let(HttpKernelInterface $kernel)
     {
-        $this->beConstructedWith($kernel);
+        $config = [];
+        $this->beConstructedWith($kernel, $config);
     }
 
     function it_is_an_event_subscriber()
