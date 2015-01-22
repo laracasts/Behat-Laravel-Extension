@@ -136,3 +136,9 @@ $lastEmail = $this->fetchInbox()[0];
 If working along, you can dump that variable to see all of the various fields that you may write assertions against. In the example above, we're ensuring that the subject was set correctly, and the body of the email matches a stub that we've created.
 
 Even better, after each scenario completes, we'll go ahead and empty out your MailTrap inbox for convenience.
+
+## FAQ
+
+### I'm getting a "got an error "PHP Fatal error: Maximum function nesting level of '100' reached, aborting!" error.
+
+Sounds like you're using Xdebug. [Increase the max nesting level](http://xdebug.org/docs/all_settings#max_nesting_level).
