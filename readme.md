@@ -139,6 +139,6 @@ Even better, after each scenario completes, we'll go ahead and empty out your Ma
 
 ## FAQ
 
-### I'm getting a "got an error "PHP Fatal error: Maximum function nesting level of '100' reached, aborting!" error.
+### I'm getting a "PHP Fatal error: Maximum function nesting level of '100' reached, aborting!" error.
 
 Sounds like you're using Xdebug. [Increase the max nesting level](http://xdebug.org/docs/all_settings#max_nesting_level).
