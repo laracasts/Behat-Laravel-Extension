@@ -67,7 +67,7 @@ trait MailTrap
 
     /**
      * Fetch the latest message from MailTrap inbox.
-     * 
+     *
      * @return mixed
      */
     protected function fetchLatestMessage($inboxId = null)
@@ -136,3 +136,4 @@ trait MailTrap
     }
 
 }
+
