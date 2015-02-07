@@ -43,6 +43,7 @@ class KernelAwareInitializerSpec extends ObjectBehavior
     function it_does_nothing_if_the_context_is_not_kernel_aware(Context $context, $kernel)
     {
         $this->initializeContext($context)->shouldBe(null);
+        $this->rebootKernel()->shouldBe(null);
     }
 
 }

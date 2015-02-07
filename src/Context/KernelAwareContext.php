@@ -16,4 +16,12 @@ interface KernelAwareContext extends Context
      */
     public function setApp(HttpKernelInterface $kernel);
 
+    /**
+     * Returns the specified session or active session
+     *
+     * @param string|null $name name of the session
+     * @return mixed
+     */
+    public function getSession($name = null);
+
 }
