@@ -71,6 +71,8 @@ class LaravelBooter
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
+        $app->make('Illuminate\Http\Request')->capture();
+
         return $app;
     }
 
