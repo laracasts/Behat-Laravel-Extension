@@ -73,7 +73,7 @@ trait MailTrap
      */
     public function emptyInbox()
     {
-        $this->requestClient()->patch($this->getMailTrapCleanUrl(), ['future' => true]);
+        $this->requestClient()->patch($this->getMailTrapCleanUrl());
     }
 
     /**
