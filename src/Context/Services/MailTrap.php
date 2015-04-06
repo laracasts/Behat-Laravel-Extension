@@ -69,7 +69,8 @@ trait MailTrap
      *
      * Empty the MailTrap inbox.
      *
-     * @AfterScenario @mail
+     * @AfterScenario 
+     * @mail
      */
     public function emptyInbox()
     {
