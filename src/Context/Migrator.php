@@ -14,7 +14,7 @@ trait Migrator
      */
     public function migrate()
     {
-        Artisan::call('migrate');
+        Artisan::call('migrate:refresh');
     }
 
 }
