@@ -37,7 +37,17 @@ Here, is where we reference the Laravel extension, and tell Behat to use it as o
 This file should, like the standard `.env` file in your project root, contain any special environment variables
 for your tests (such as a special acceptance test-specific database).
 
+
 # 3. Write Some Features
+
+Finally run `vendor/bin/behat --init` to setup your folders.
+
+Now at the root of your app is an acceptance folder. In there is where you can place your tests. For example
+
+~~~
+features/foo.feature
+~~~
+
 
 ![example](https://dl.dropboxusercontent.com/u/774859/Work/BehatLaravelExtension/example.png)
 
@@ -136,6 +146,33 @@ $lastEmail = $this->fetchInbox()[0];
 If working along, you can dump that variable to see all of the various fields that you may write assertions against. In the example above, we're ensuring that the subject was set correctly, and the body of the email matches a stub that we've created.
 
 Even better, after each scenario completes, we'll go ahead and empty out your MailTrap inbox for convenience.
+
+## Selenium
+
+First install Selenium on your machine and run that Java jar file in a ternminal. You can then update your behat.yml as below. One it sets the host url you are testing if you are not running tests against localhost. 
+
+Also, seen below, is Selenium being used on my host machine, if I want to run the tests inside of my homestead (guest). It will then connect to the host machines Selenium server and open chrome on my machine, by default it is Firefox. Of course you would need to install the mink driver for this by running 
+
+```
+composer require behat/mink-selenium2-driver
+```
+
+The add this if you want it these settings
+
+```
+default:
+    extensions:
+        Laracasts\Behat:
+            # env_path: .env.behat
+        Behat\MinkExtension:
+            base_url: https://mysite.dev
+            default_session: laravel
+            laravel: ~
+            selenium2:
+              wd_host: "http://192.168.10.1:4444/wd/hub"
+            browser_name: chrome
+
+```
 
 ## FAQ
 
