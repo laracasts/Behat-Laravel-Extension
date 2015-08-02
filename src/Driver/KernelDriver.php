@@ -8,6 +8,10 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelDriver extends BrowserKitDriver
 {
+    /**
+     * @var string
+     */
+    private $baseUrl;
 
     /**
      * Create a new KernelDriver.
@@ -17,6 +21,7 @@ class KernelDriver extends BrowserKitDriver
      */
     public function __construct(HttpKernelInterface $app, $baseUrl = null)
     {
+        $this->baseUrl = $baseUrl;
         parent::__construct(new Client($app), $baseUrl);
     }
 
@@ -28,7 +33,7 @@ class KernelDriver extends BrowserKitDriver
      */
     public function reboot($app)
     {
-        return $this->__construct($app);
+        return $this->__construct($app, $this->baseUrl);
     }
 
 }
