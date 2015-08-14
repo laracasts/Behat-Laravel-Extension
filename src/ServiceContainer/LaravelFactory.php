@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class LaravelFactory implements DriverFactory
 {
-
     /**
      * {@inheritdoc}
      */
@@ -43,7 +42,7 @@ class LaravelFactory implements DriverFactory
 
         return new Definition('Laracasts\Behat\Driver\KernelDriver', [
             new Reference('laravel.app'),
-            '%mink.base_url%'
+            '%mink.base_url%',
         ]);
     }
 
@@ -54,12 +53,10 @@ class LaravelFactory implements DriverFactory
      */
     private function assertBrowserkitIsAvailable()
     {
-        if ( ! class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
+        if (!class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
             throw new RuntimeException(
                 'Install MinkBrowserKitDriver in order to use the laravel driver.'
             );
         }
     }
-
 }
-

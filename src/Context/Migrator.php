@@ -6,7 +6,6 @@ use Artisan;
 
 trait Migrator
 {
-
     /**
      * Migrate the database before each scenario.
      *
@@ -16,5 +15,4 @@ trait Migrator
     {
         Artisan::call('migrate');
     }
-
 }

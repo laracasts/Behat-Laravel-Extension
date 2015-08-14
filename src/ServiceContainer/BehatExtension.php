@@ -12,7 +12,6 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class BehatExtension implements Extension
 {
-
     /**
      * {@inheritdoc}
      */
@@ -27,7 +26,7 @@ class BehatExtension implements Extension
     public function initialize(ExtensionManager $extensionManager)
     {
         if (null !== $minkExtension = $extensionManager->getExtension('mink')) {
-            $minkExtension->registerDriverFactory(new LaravelFactory);
+            $minkExtension->registerDriverFactory(new LaravelFactory());
         }
     }
 
@@ -68,6 +67,7 @@ class BehatExtension implements Extension
      *
      * @param ContainerBuilder $container
      * @param array            $config
+     *
      * @return mixed
      */
     private function loadLaravel(ContainerBuilder $container, array $config)
@@ -94,5 +94,4 @@ class BehatExtension implements Extension
 
         $container->setDefinition('laravel.initializer', $definition);
     }
-
 }

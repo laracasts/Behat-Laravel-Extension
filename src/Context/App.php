@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 trait App
 {
-
     /**
      * The Laravel application.
      *
@@ -33,5 +32,4 @@ trait App
     {
         return $this->app;
     }
-
 }

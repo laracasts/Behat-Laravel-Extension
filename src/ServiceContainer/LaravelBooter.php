@@ -6,7 +6,6 @@ use RuntimeException;
 
 class LaravelBooter
 {
-
     /**
      * The base path for the application.
      *
@@ -53,7 +52,6 @@ class LaravelBooter
         return $this->environmentFile;
     }
 
-
     /**
      * Boot the app.
      *
@@ -61,7 +59,7 @@ class LaravelBooter
      */
     public function boot()
     {
-        $bootstrapPath = $this->basePath() . '/bootstrap/app.php';
+        $bootstrapPath = $this->basePath().'/bootstrap/app.php';
 
         $this->assertBootstrapFileExists($bootstrapPath);
 
@@ -80,13 +78,13 @@ class LaravelBooter
      * Ensure that the provided Laravel bootstrap path exists.
      *
      * @param string $bootstrapPath
+     *
      * @throws RuntimeException
      */
     private function assertBootstrapFileExists($bootstrapPath)
     {
-        if ( ! file_exists($bootstrapPath)) {
+        if (!file_exists($bootstrapPath)) {
             throw new RuntimeException('Could not locate the path to the Laravel bootstrap file.');
         }
     }
-
 }
