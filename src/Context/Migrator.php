@@ -17,4 +17,14 @@ trait Migrator
         Artisan::call('migrate');
     }
 
+    /**
+     * Refresh the database after each scenario.
+     *
+     * @afterScenario
+     */
+    public function refresh()
+    {
+        Artisan::call('migrate:refresh');
+    }
+
 }
