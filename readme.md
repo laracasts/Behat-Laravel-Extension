@@ -37,7 +37,45 @@ Here, is where we reference the Laravel extension, and tell Behat to use it as o
 This file should, like the standard `.env` file in your project root, contain any special environment variables
 for your tests (such as a special acceptance test-specific database).
 
-# 3. Write Some Features
+# 3. Setting up FeatureContext
+
+Run, from the root of your app
+
+~~~
+vendor/bin/behat --init 
+~~~
+
+It should set 
+
+~~~
+features/bootstrap/FeatureContext.php
+~~~ 
+
+At this point, unless you are doing only domain testing an no DOM interactions, you should set it to extend MinkContext. 
+
+~~~
+
+<?php
+
+use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\MinkExtension\Context\MinkContext
+
+/**
+ * Defines application features from the specific context.
+ */
+class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
+{
+
+~~~ 
+
+
+# 4. Write Some Features
 
 ![example](https://dl.dropboxusercontent.com/u/774859/Work/BehatLaravelExtension/example.png)
 
