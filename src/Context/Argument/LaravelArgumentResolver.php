@@ -31,9 +31,18 @@ class LaravelArgumentResolver implements ArgumentResolver
         $resolvedArguments = [];
 
         foreach ($arguments as $key => $argument) {
-            $resolvedArguments[$key] = $this->app->make($argument);
+            $resolvedArguments[$key] = $this->resolveArgument($argument);
         }
 
         return $resolvedArguments;
+    }
+
+    private function resolveArgument($arg)
+    {
+        if (substr($arg, 0, 4) === '@') {
+            return $this->app->make($arg);
+        }
+
+        return $arg;
     }
 }
