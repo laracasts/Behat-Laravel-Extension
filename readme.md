@@ -173,7 +173,14 @@ $lastEmail = $this->fetchInbox()[0];
 
 If working along, you can dump that variable to see all of the various fields that you may write assertions against. In the example above, we're ensuring that the subject was set correctly, and the body of the email matches a stub that we've created.
 
-Even better, after each scenario completes, we'll go ahead and empty out your MailTrap inbox for convenience.
+Even better, after each scenario completes, we'll go ahead and empty out your MailTrap inbox for convenience by adding the `@mail` tag to the scenario or right above the Feature
+
+```
+  @mail
+  Scenario: User will get notified
+    Given there are jobs that have been started by this user
+    Then when the report is done the user will get an email to let them know it is done
+```
 
 ## FAQ
 
