@@ -8,8 +8,8 @@ This extension offers an incredibly simple (and fast) way to begin testing and d
 
 
 ## Sections
-  * [Laravel](/#laravel)
-  * [Lumen](/#lumen)
+  * [Laravel](#laravel)
+  * [Lumen](#lumen)
 
 
 # Laravel 
