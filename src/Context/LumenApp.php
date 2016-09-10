@@ -1,25 +1,24 @@
 <?php
 
-namespace Laracasts\Behat\Driver;
+namespace Laracasts\Behat\Context;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Laravel\Lumen\Application;
 
-trait App
+trait LumenApp
 {
-
     /**
      * The Laravel application.
      *
-     * @var HttpKernelInterface
+     * @var Application
      */
     protected $app;
 
     /**
      * Set the application.
      *
-     * @param HttpKernelInterface $app
+     * @param Application $app
      */
-    public function setApp(HttpKernelInterface $app)
+    public function setApp(Application $app)
     {
         $this->app = $app;
     }
@@ -27,11 +26,10 @@ trait App
     /**
      * Get the application.
      *
-     * @return mixed
+     * @return Application
      */
     public function app()
     {
         return $this->app;
     }
-
 }

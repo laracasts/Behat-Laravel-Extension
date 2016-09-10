@@ -1,4 +1,4 @@
-This extension offers an incredibly simple (and fast) way to begin testing and driving your Laravel applications with Behat. Some benefits include:
+This extension offers an incredibly simple (and fast) way to begin testing and driving your Laravel or Lumen applications with Behat. Some benefits include:
 
 - **Fast:** It doesn't depend on anything like Goutte, so it offers a super-fast way to test your UI. You don't even need to setup a host to run your tests.
 - **Refresh:** Laravel is automatically rebooted after each scenario (so nothing like user sessions will be persisted).
@@ -6,6 +6,13 @@ This extension offers an incredibly simple (and fast) way to begin testing and d
 - **Access Laravel:** You instantly have access to Laravel (things like facades and such) from your `FeatureContext` file.
 - **Workflow:** A number of useful traits are available, which will speed up your workflow.
 
+
+## Sections
+  * [Laravel](/#laravel)
+  * [Lumen](/#lumen)
+
+
+# Laravel 
 To get started, you only need to follow a few steps:
 
 > Prefer a video walk-through? [See this lesson from Laracasts](https://laracasts.com/lessons/laravel-5-and-behat-bffs).
@@ -188,3 +195,65 @@ Even better, after each scenario completes, we'll go ahead and empty out your Ma
 ### I'm getting a "PHP Fatal error: Maximum function nesting level of '100' reached, aborting!" error.
 
 Sounds like you're using Xdebug. [Increase the max nesting level](http://xdebug.org/docs/all_settings#max_nesting_level).
+
+
+# Lumen
+
+
+## This version (v2.0.1) is compatible with Lumen 5.2; for older versions use []v1.0.0](https://github.com/arisro/behat-lumen-extension/releases/tag/v1.0.0)
+
+This is an adaptation for Lumen of the Laravel Behat Extension package (https://github.com/laracasts/Behat-Laravel-Extension).
+
+This is written by [Aris Buzachis](https://github.com/arisro)
+
+The original repo is [here](https://github.com/arisro/behat-lumen-extension)
+
+It's a custom Behat / Mink driver which extends the BrowserKit driver.
+
+This will allow you to write functional tests using Behat (boot the Lumen application in a custom environment, mock components from the FeatureContext, requests are done directly on the application - no external requests).
+
+To get started, you only need to follow a few steps:
+
+# 1. Install Dependencies
+
+As always, we need to pull in some dependencies through Composer.
+
+    composer require behat/behat behat/mink behat/mink-extension arisro/behat-lumen-extension --dev
+
+This will give us access to Behat, Mink, and, of course, the Lumen extension.
+
+If you want to use a custom .env file for the Behat tests you will need to modify `bootstrap/app.php` like this:
+
+```php
+try {
+    (new Dotenv\Dotenv(__DIR__.'/../', isset($dotEnvFile) ?: '.env'))->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+    //
+}
+```
+
+# 2. Create the behat.yml configuration file
+
+Next, within your project root, create a `behat.yml` file, and add:
+
+```yml
+default:
+  extensions:
+    Laracasts\Behat\ServiceContainer\LumenExtension:
+      # env_file: .env.behat
+    Behat\MinkExtension:
+      default_session: lumen
+      lumen: ~
+  suites:
+    default:
+      contexts: [ FeatureContext ]
+```
+
+Optinally, you can specify a different .env file for your functional tests (with a test DB for example).
+
+# 3. Write Some Features
+
+You have a very small example here https://github.com/arisro/behat-lumen-example.
+
+Note: if you want to leverage some of the Mink helpers in your `FeatureContext` file, then be sure to extend `Behat\MinkExtension\Context\MinkContext`.
+
