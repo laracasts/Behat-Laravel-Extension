@@ -200,9 +200,7 @@ Sounds like you're using Xdebug. [Increase the max nesting level](http://xdebug.
 # Lumen
 
 
-## This version (v2.0.1) is compatible with Lumen 5.2; for older versions use []v1.0.0](https://github.com/arisro/behat-lumen-extension/releases/tag/v1.0.0)
-
-This is an adaptation for Lumen of the Laravel Behat Extension package (https://github.com/laracasts/Behat-Laravel-Extension).
+## This version (v2.0.1) is compatible with Lumen 5.2; for older versions use [v1.0.0](https://github.com/arisro/behat-lumen-extension/releases/tag/v1.0.0)
 
 This is written by [Aris Buzachis](https://github.com/arisro)
 
