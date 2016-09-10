@@ -51,7 +51,7 @@ It should set
 features/bootstrap/FeatureContext.php
 ~~~ 
 
-At this point, unless you are doing only domain testing an no DOM interactions, you should set it to extend MinkContext. 
+At this point you should set it to extend MinkContext. 
 
 ~~~
 
