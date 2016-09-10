@@ -64,7 +64,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
-use Behat\MinkExtension\Context\MinkContext
+use Behat\MinkExtension\Context\MinkContext;
 
 /**
  * Defines application features from the specific context.
