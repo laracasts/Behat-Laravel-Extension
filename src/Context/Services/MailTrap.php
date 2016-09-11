@@ -8,11 +8,10 @@ use Exception;
 
 trait MailTrap
 {
-
     /**
      * The MailTrap configuration.
      *
-     * @var integer
+     * @var int
      */
     protected $mailTrapInboxId;
 
@@ -33,7 +32,8 @@ trait MailTrap
     /**
      * Get the configuration for MailTrap.
      *
-     * @param integer|null $inboxId
+     * @param int|null $inboxId
+     *
      * @throws Exception
      */
     protected function applyMailTrapConfiguration($inboxId = null)
@@ -51,22 +51,23 @@ trait MailTrap
     /**
      * Fetch a MailTrap inbox.
      *
-     * @param  integer|null $inboxId
+     * @param int|null $inboxId
+     *
      * @return mixed
      */
     protected function fetchInbox($inboxId = null)
     {
-        if ( ! $this->alreadyConfigured()) {
+        if (!$this->alreadyConfigured()) {
             $this->applyMailTrapConfiguration($inboxId);
         }
 
-        return $this->requestClient()
-            ->get($this->getMailTrapMessagesUrl())
-            ->json();
+        $response = $this->requestClient()
+            ->get($this->getMailTrapMessagesUrl());
+
+        return json_decode($response->getBody(true));
     }
 
     /**
-     *
      * Empty the MailTrap inbox.
      *
      * @AfterScenario @mail
@@ -99,7 +100,7 @@ trait MailTrap
     /**
      * Determine if MailTrap config has been retrieved yet.
      *
-     * @return boolean
+     * @return bool
      */
     protected function alreadyConfigured()
     {
@@ -113,16 +114,13 @@ trait MailTrap
      */
     protected function requestClient()
     {
-        if ( ! $this->client) {
+        if (!$this->client) {
             $this->client = new Client([
-                'base_url' => 'https://mailtrap.io',
-                'defaults' => [
-                    'headers' => ['Api-Token' => $this->mailTrapApiKey]
-                ]
+                'base_uri' => 'https://mailtrap.io',
+                'headers' => ['Api-Token' => $this->mailTrapApiKey],
             ]);
         }
 
         return $this->client;
     }
-
 }

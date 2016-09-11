@@ -6,7 +6,6 @@ use DB;
 
 trait DatabaseTransactions
 {
-
     /**
      * Begin a database transaction.
      *
@@ -18,7 +17,6 @@ trait DatabaseTransactions
     }
 
     /**
-     *
      * Roll it back after the scenario.
      *
      * @AfterScenario
@@ -27,5 +25,4 @@ trait DatabaseTransactions
     {
         DB::rollback();
     }
-
 }

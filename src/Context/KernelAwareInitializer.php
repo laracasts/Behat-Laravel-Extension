@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelAwareInitializer implements EventSubscriberInterface, ContextInitializer
 {
-
     /**
      * The app kernel.
      *
@@ -42,7 +41,7 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     public static function getSubscribedEvents()
     {
         return [
-            ScenarioTested::AFTER => ['rebootKernel', -15]
+            ScenarioTested::AFTER => ['rebootKernel', -15],
         ];
     }
 
@@ -79,5 +78,4 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
 
         $this->setAppOnContext();
     }
-
 }

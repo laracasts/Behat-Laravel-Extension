@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelDriver extends BrowserKitDriver
 {
-
     /**
      * Create a new KernelDriver.
      *
@@ -24,11 +23,11 @@ class KernelDriver extends BrowserKitDriver
      * Refresh the driver.
      *
      * @param HttpKernelInterface $app
+     *
      * @return KernelDriver
      */
     public function reboot($app)
     {
         return $this->__construct($app);
     }
-
 }
