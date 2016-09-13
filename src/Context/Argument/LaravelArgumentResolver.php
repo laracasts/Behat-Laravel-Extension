@@ -37,10 +37,16 @@ class LaravelArgumentResolver implements ArgumentResolver
         return $resolvedArguments;
     }
 
+    /**
+     * Resolve argument
+     *
+     * @param  string $arg
+     * @return object
+     */
     private function resolveArgument($arg)
     {
-        if (substr($arg, 0, 4) === '@') {
-            return $this->app->make($arg);
+        if (substr($arg, 0, 1) === '@') {
+            return $this->app->make(substr($arg, 1));
         }
 
         return $arg;
