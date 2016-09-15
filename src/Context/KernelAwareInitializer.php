@@ -5,6 +5,7 @@ namespace Laracasts\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
+use Laracasts\Behat\Driver\KernelDriver;
 use Laracasts\Behat\ServiceContainer\LaravelBooter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -71,13 +72,15 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
      */
     public function rebootKernel()
     {
-        $this->kernel->flush();
+        $driver = $this->context->getSession('laravel')->getDriver();
 
-        $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile());
+        if ($driver instanceof KernelDriver) {
+            $this->kernel->flush();
 
-        $this->context->getSession('laravel')->getDriver()->reboot($this->kernel = $laravel->boot());
-
-        $this->setAppOnContext();
+            $laravel = new LaravelBooter($this->kernel->basePath(), $this->kernel->environmentFile());
+            $driver->reboot($this->kernel = $laravel->boot());
+            $this->setAppOnContext();
+        }
     }
 
 }
