@@ -2,7 +2,7 @@
 
 namespace Laracasts\Behat\Context;
 
-use DB;
+use DB, Cache;
 
 trait DatabaseTransactions
 {
@@ -26,6 +26,7 @@ trait DatabaseTransactions
     public static function rollback()
     {
         DB::rollback();
+        Cache::flush();
     }
 
 }
