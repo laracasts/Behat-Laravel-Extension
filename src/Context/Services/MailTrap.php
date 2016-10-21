@@ -59,10 +59,8 @@ trait MailTrap
         if ( ! $this->alreadyConfigured()) {
             $this->applyMailTrapConfiguration($inboxId);
         }
-
-        return $this->requestClient()
-            ->get($this->getMailTrapMessagesUrl())
-            ->json();
+        
+        return return json_decode($this->requestClient()->get($this->getMailTrapMessagesUrl())->getBody());
     }
 
     /**
@@ -115,10 +113,8 @@ trait MailTrap
     {
         if ( ! $this->client) {
             $this->client = new Client([
-                'base_url' => 'https://mailtrap.io',
-                'defaults' => [
-                    'headers' => ['Api-Token' => $this->mailTrapApiKey]
-                ]
+                'base_uri' => 'https://mailtrap.io',
+                'headers' => ['Api-Token' => $this->mailTrapApiKey]
             ]);
         }
 
