@@ -60,7 +60,7 @@ trait MailTrap
             $this->applyMailTrapConfiguration($inboxId);
         }
         
-        return return json_decode($this->requestClient()->get($this->getMailTrapMessagesUrl())->getBody());
+        return json_decode($this->requestClient()->get($this->getMailTrapMessagesUrl())->getBody());
     }
 
     /**
