@@ -53,6 +53,7 @@ trait MailTrap
      *
      * @param  integer|null $inboxId
      * @return mixed
+     * @throws RuntimeException
      */
     protected function fetchInbox($inboxId = null)
     {
@@ -60,9 +61,11 @@ trait MailTrap
             $this->applyMailTrapConfiguration($inboxId);
         }
 
-        return $this->requestClient()
+        $body = $this->requestClient()
             ->get($this->getMailTrapMessagesUrl())
-            ->json();
+            ->getBody();
+
+        return $this->parseJson($body);
     }
 
     /**
@@ -115,14 +118,27 @@ trait MailTrap
     {
         if ( ! $this->client) {
             $this->client = new Client([
-                'base_url' => 'https://mailtrap.io',
-                'defaults' => [
-                    'headers' => ['Api-Token' => $this->mailTrapApiKey]
-                ]
+                'base_uri' => 'https://mailtrap.io',
+                'headers' => ['Api-Token' => $this->mailTrapApiKey]
             ]);
         }
 
         return $this->client;
     }
 
+    /**
+     * @param $body
+     * @return array|mixed
+     * @throws RuntimeException
+     */
+    protected function parseJson($body)
+    {
+        $data = json_decode((string)$body, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new RuntimeException('Unable to parse response body into JSON: '.json_last_error());
+        }
+
+        return $data === null ? array() : $data;
+    }
 }
