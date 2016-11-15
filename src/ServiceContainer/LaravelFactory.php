@@ -3,6 +3,7 @@
 namespace Laracasts\Behat\ServiceContainer;
 
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
+use RuntimeException;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
