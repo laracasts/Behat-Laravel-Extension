@@ -51,9 +51,11 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
      */
     public function initializeContext(Context $context)
     {
-        $this->context = $context;
+        if ($context instanceof \FeatureContext) {
+            $this->context = $context;
+        }
 
-        $this->setAppOnContext($this->kernel);
+        $this->setAppOnContext();
     }
 
     /**
