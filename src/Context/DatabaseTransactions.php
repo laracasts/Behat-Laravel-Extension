@@ -39,10 +39,7 @@ trait DatabaseTransactions
     public function rollback()
     {
         foreach ($this->connectionsToTransact() as $name) {
-            $connection = DB::connection($name);
-
-            $connection->rollBack();
-            $connection->disconnect();
+            DB::connection($name)->rollBack();
         }
         Cache::flush();
     }
