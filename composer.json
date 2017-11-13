@@ -1,13 +1,13 @@
 {
-    "name": "troccoli/behat-laravel-extension",
+    "name": "laracasts/behat-laravel-extension",
     "type": "behat-extension",
     "description": "Laravel extension for Behat",
     "keywords": ["laravel", "behat", "extension", "bdd"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Giulio Troccoli-Allard",
-            "email": "giulio@troccoli.it"
+            "name": "JeffreyWay",
+            "email": "jeffrey@laracasts.com"
         }
     ],
     "autoload": {
