@@ -8,13 +8,26 @@ trait DatabaseTransactions
 {
 
     /**
+     * The database connections that should have transactions.
+     *
+     * @return array
+     */
+    protected function connectionsToTransact()
+    {
+        return property_exists($this, 'connectionsToTransact')
+            ? $this->connectionsToTransact : [null];
+    }
+    
+    /**
      * Begin a database transaction.
      *
      * @BeforeScenario
      */
-    public static function beginTransaction()
+    public function beginTransaction()
     {
-        DB::beginTransaction();
+        foreach ($this->connectionsToTransact() as $name) {
+            DB::connection($name)->beginTransaction();
+        }
     }
 
     /**
@@ -23,9 +36,14 @@ trait DatabaseTransactions
      *
      * @AfterScenario
      */
-    public static function rollback()
+    public function rollback()
     {
-        DB::rollback();
+        foreach ($this->connectionsToTransact() as $name) {
+            $connection = DB::connection($name);
+
+            $connection->rollBack();
+            $connection->disconnect();
+        }
         Cache::flush();
     }
 
