@@ -14,7 +14,7 @@ To get started, you only need to follow a few steps:
 
 As always, we need to pull in some dependencies through Composer.
 
-    composer require behat/behat behat/mink behat/mink-extension laracasts/behat-laravel-extension symfony/dependency-injection:"3.*" --dev
+    composer require behat/behat behat/mink behat/mink-extension laracasts/behat-laravel-extension --dev
 
 This will give us access to Behat, Mink, and, of course, the Laravel extension.
 
