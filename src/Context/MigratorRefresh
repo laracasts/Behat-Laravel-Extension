@@ -1,0 +1,15 @@
+<?php
+namespace Laracasts\Behat\Context;
+use Artisan;
+trait MigratorRefresh
+{
+    /**
+     * Migrate and refresh the database before each scenario.
+     *
+     * @beforeScenario
+     */
+    public function migrateAndRefresh()
+    {
+        Artisan::call('migrate:refresh');
+    }
+}
