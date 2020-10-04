@@ -23,6 +23,7 @@
     "require-dev": {
         "phpspec/phpspec": "~2.1",
         "symfony/symfony": "~2.6",
-        "behat/mink-extension": "~2.0"
+        "symfony/http-kernel": "~5.0",
+        "friends-of-behat/mink-extension": "^2.4"
     }
 }
