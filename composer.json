@@ -8,6 +8,11 @@
         {
             "name": "JeffreyWay",
             "email": "jeffrey@laracasts.com"
+        },
+        {
+            "name": "Marcin Lenkowski",
+            "email": "marcin.lenkowski@escola.pl",
+            "homepage": "https://escola.pl"
         }
     ],
     "autoload": {
