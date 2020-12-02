@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08d0893b-0794-4fa0-b7c1-f825d1957a9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Context/LaravelContext.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Context/LaravelContext.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Context/LaravelContext.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601822602384</updated>
       <workItem from="1601822603542" duration="2212000" />
-      <workItem from="1606934211261" duration="297000" />
+      <workItem from="1606934211261" duration="489000" />
     </task>
     <task id="LOCAL-00001" summary="solution that fix problems on laravel 7 + laravel 8.">
       <created>1601833672767</created>
@@ -102,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601833672767</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add LaravelContext for creating standard Laravel tests">
+      <created>1606934663348</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606934663348</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,16 +128,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="solution that fix problems on laravel 7 + laravel 8." />
-    <option name="LAST_COMMIT_MESSAGE" value="solution that fix problems on laravel 7 + laravel 8." />
+    <MESSAGE value="Add LaravelContext for creating standard Laravel tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add LaravelContext for creating standard Laravel tests" />
   </component>
   <component name="WindowStateProjectService">
     <state x="341" y="149" key="SettingsEditor" timestamp="1601833586798">
       <screen x="0" y="23" width="1680" height="974" />
     </state>
     <state x="341" y="149" key="SettingsEditor/0.23.1680.974@0.23.1680.974" timestamp="1601833586798" />
-    <state x="440" y="237" key="Vcs.Push.Dialog.v2" timestamp="1601833863831">
-      <screen x="0" y="23" width="1680" height="974" />
+    <state x="440" y="237" key="Vcs.Push.Dialog.v2" timestamp="1606934680852">
+      <screen x="0" y="23" width="1680" height="973" />
     </state>
+    <state x="440" y="237" key="Vcs.Push.Dialog.v2/0.23.1680.973@0.23.1680.973" timestamp="1606934680852" />
     <state x="440" y="237" key="Vcs.Push.Dialog.v2/0.23.1680.974@0.23.1680.974" timestamp="1601833863831" />
   </component>
 </project>

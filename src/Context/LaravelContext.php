@@ -1,6 +1,6 @@
 <?php
 
-namespace Features;
+namespace Laracasts\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
