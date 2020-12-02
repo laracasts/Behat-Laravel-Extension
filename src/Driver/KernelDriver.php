@@ -3,7 +3,7 @@
 namespace Laracasts\Behat\Driver;
 
 use Behat\Mink\Driver\BrowserKitDriver;
-use Symfony\Component\HttpKernel\Client;
+use Symfony\Component\HttpKernel\HttpKernelBrowser as Client;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelDriver extends BrowserKitDriver
