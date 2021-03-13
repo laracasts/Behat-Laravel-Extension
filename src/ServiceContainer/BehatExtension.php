@@ -2,8 +2,11 @@
 
 namespace Laracasts\Behat\ServiceContainer;
 
+use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
+use Illuminate\Foundation\Application;
+use Laracasts\Behat\Context\LaravelAwareInitializer;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Behat\Behat\Context\ServiceContainer\ContextExtension;
@@ -12,104 +15,67 @@ use Laracasts\Behat\Context\Argument\LaravelArgumentResolver;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 
-class BehatExtension implements Extension
+final class BehatExtension implements Extension
 {
+    public const LARAVEL_APP = 'laravel.app';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigKey()
     {
         return 'laravel';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function initialize(ExtensionManager $extensionManager)
     {
-        if (null !== $minkExtension = $extensionManager->getExtension('mink')) {
-            $minkExtension->registerDriverFactory(new LaravelFactory);
+        /** @var MinkExtension $minkExtension */
+        $minkExtension = $extensionManager->getExtension('mink');
+
+        if (null !== $minkExtension) {
+            $minkExtension->registerDriverFactory(new LaravelFactory());
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
-        //
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(ArrayNodeDefinition $builder)
     {
-        $builder
-            ->children()
-                ->scalarNode('bootstrap_path')
-                    ->defaultValue('bootstrap/app.php')
-                ->end()
-                ->scalarNode('env_path')
-                    ->defaultValue('.env.behat');
+        $builder->children()->scalarNode('env_path');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(ContainerBuilder $container, array $config)
     {
         $app = $this->loadLaravel($container, $config);
 
         $this->loadInitializer($container, $app);
-        $this->loadLaravelArgumentResolver($container, $app);
+        $this->loadLaravelArgumentResolver($container);
     }
 
-    /**
-     * Boot up Laravel.
-     *
-     * @param ContainerBuilder $container
-     * @param array            $config
-     * @return mixed
-     */
-    private function loadLaravel(ContainerBuilder $container, array $config)
+    private function loadLaravel(ContainerBuilder $container, array $config): Application
     {
-        $laravel = new LaravelBooter($container->getParameter('paths.base'), $config['env_path']);
+        $app = LaravelBooter::boot($container->getParameter('paths.base'), $config['env_path'] ?? null);
 
-        $container->set('laravel.app', $app = $laravel->boot());
+        $container->set(self::LARAVEL_APP, $app);
 
         return $app;
     }
 
-    /**
-     * Load the initializer.
-     *
-     * @param ContainerBuilder    $container
-     * @param HttpKernelInterface $app
-     */
-    private function loadInitializer(ContainerBuilder $container, $app)
+    private function loadInitializer(ContainerBuilder $container, Application $app): void
     {
-        $definition = new Definition('Laracasts\Behat\Context\KernelAwareInitializer', [$app]);
+        $definition = new Definition(LaravelAwareInitializer::class, [ $app ]);
 
-        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
-        $definition->addTag(ContextExtension::INITIALIZER_TAG, ['priority' => 0]);
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, [ 'priority' => 0 ]);
+        $definition->addTag(ContextExtension::INITIALIZER_TAG, [ 'priority' => 0 ]);
 
         $container->setDefinition('laravel.initializer', $definition);
     }
 
-    /**
-     * Load argument resolver
-     *
-     * @param  ContainerBuilder $container
-     * @param  Application $app
-     */
-    private function loadLaravelArgumentResolver(ContainerBuilder $container, $app)
+    private function loadLaravelArgumentResolver(ContainerBuilder $container): void
     {
-        $definition = new Definition(LaravelArgumentResolver::class, [
-            new Reference('laravel.app')
-        ]);
-        $definition->addTag(ContextExtension::ARGUMENT_RESOLVER_TAG, ['priority' => 0]);
+        $definition = new Definition(LaravelArgumentResolver::class, [ new Reference(self::LARAVEL_APP) ]);
+
+        $definition->addTag(ContextExtension::ARGUMENT_RESOLVER_TAG, [ 'priority' => 0 ]);
+
         $container->setDefinition('laravel.context.argument.service_resolver', $definition);
     }
 }

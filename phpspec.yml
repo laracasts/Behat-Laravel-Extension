@@ -1,4 +1,0 @@
-suites:
-    main_suite:
-        namespace: Laracasts\Behat
-        psr4_prefix: Laracasts\Behat
