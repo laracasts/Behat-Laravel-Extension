@@ -5,6 +5,7 @@ namespace Laracasts\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
+use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use Laracasts\Behat\ServiceContainer\LaravelBooter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -42,7 +43,8 @@ class KernelAwareInitializer implements EventSubscriberInterface, ContextInitial
     public static function getSubscribedEvents()
     {
         return [
-            ScenarioTested::AFTER => ['rebootKernel', -15]
+            SuiteTested::BEFORE => ['rebootKernel', 15],
+            ScenarioTested::BEFORE => ['rebootKernel', 15]
         ];
     }
 
