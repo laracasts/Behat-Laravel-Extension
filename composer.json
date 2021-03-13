@@ -1,5 +1,5 @@
 {
-    "name": "laracasts/behat-laravel-extension",
+    "name": "cevinio/behat-laravel-extension",
     "type": "behat-extension",
     "description": "Laravel extension for Behat",
     "keywords": ["laravel", "behat", "extension", "bdd"],
