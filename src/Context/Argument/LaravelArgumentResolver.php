@@ -2,18 +2,18 @@
 namespace Laracasts\Behat\Context\Argument;
 
 use \ReflectionClass;
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Behat\Behat\Context\Argument\ArgumentResolver;
 
 class LaravelArgumentResolver implements ArgumentResolver
 {
-    /** @var Application Laravel application instance */
+    /** @var Container Laravel application instance */
     private $app;
 
     /**
-     * @param Application $app
+     * @param Container $app
      */
-    public function __construct(Application $app)
+    public function __construct(Container $app)
     {
         $this->app = $app;
     }
@@ -45,7 +45,7 @@ class LaravelArgumentResolver implements ArgumentResolver
      */
     private function resolveArgument($arg)
     {
-        if (substr($arg, 0, 1) === '@') {
+        if (is_string($arg) === true && substr($arg, 0, 1) === '@') {
             return $this->app->make(substr($arg, 1));
         }
 
