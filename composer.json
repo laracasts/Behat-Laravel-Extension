@@ -4,15 +4,9 @@
     "description": "Laravel extension for Behat",
     "keywords": ["laravel", "behat", "extension", "bdd"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "JeffreyWay",
-            "email": "jeffrey@laracasts.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
-            "Laracasts\\Behat\\": "src"
+            "Cevinio\\Behat\\": "src"
         }
     },
     "require": {

@@ -1,26 +1,14 @@
 <?php
 
-namespace Laracasts\Behat\Context;
+namespace Cevinio\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
 use Illuminate\Foundation\Application;
+use Cevinio\Behat\ServiceContainer\LaravelFactory;
 
 interface LaravelAwareContext extends Context
 {
-    public function setApp(Application $app): void;
-
-    /**
-     * Returns registered session by it's name or default one.
-     *
-     * @see Mink::getSession()
-     *
-     * @param string $name session name
-     *
-     * @return Session
-     *
-     * @throws \InvalidArgumentException If the named session is not registered
-     */
-    public function getSession($name = null);
+    public function setLaravelFactory(LaravelFactory $factory): void;
 }

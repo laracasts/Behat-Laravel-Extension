@@ -1,24 +1,25 @@
 <?php
 
-namespace Laracasts\Behat\Context;
+namespace Cevinio\Behat\Context;
 
 use Illuminate\Foundation\Application;
+use Cevinio\Behat\ServiceContainer\LaravelFactory;
 
 trait LaravelAware
 {
-    /** @var Application */
-    protected $app;
+    /** @var LaravelFactory */
+    private $factory;
 
     /**
-     * @see LaravelAwareContext::setApp()
+     * @see LaravelAwareContext::setLaravelFactory()
      */
-    public function setApp(Application $app): void
+    public function setLaravelFactory(LaravelFactory $factory): void
     {
-        $this->app = $app;
+        $this->factory = $factory;
     }
 
     public function app(): Application
     {
-        return $this->app;
+        return $this->factory->get();
     }
 }

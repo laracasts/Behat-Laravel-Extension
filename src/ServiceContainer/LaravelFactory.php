@@ -1,33 +1,59 @@
 <?php
 
-namespace Laracasts\Behat\ServiceContainer;
+namespace Cevinio\Behat\ServiceContainer;
 
-use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
-use Laracasts\Behat\Driver\KernelDriver;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+use Cevinio\Behat\Driver\LaravelDriver;
 
-final class LaravelFactory implements DriverFactory
+final class LaravelFactory
 {
-    public const LARAVEL_DRIVER = 'laravel';
+    /** @var string */
+    private $bootstrapPath;
 
-    public function getDriverName()
+    /** @var Application|null */
+    private $app;
+
+    /** @var LaravelDriver[] */
+    private $drivers;
+
+    public function __construct(string $bootstrapPath)
     {
-        return self::LARAVEL_DRIVER;
+        $this->bootstrapPath = $bootstrapPath;
+        $this->app = null;
+        $this->drivers = [];
     }
 
-    public function supportsJavascript()
+    public function get(): Application
     {
-        return false;
+        if (null === $this->app) {
+            $this->reboot();
+        }
+
+        return $this->app;
     }
 
-    public function configure(ArrayNodeDefinition $builder)
+    public function reboot(): void
     {
+        if (null !== $this->app) {
+            $this->app->flush();
+            $this->app = null;
+        }
+
+        /** @var Application $app */
+        $this->app = require $this->bootstrapPath;
+
+        $this->app->make(Kernel::class)->bootstrap();
+        $this->app->make(Request::class)->capture();
+
+        foreach ($this->drivers as $driver) {
+            $driver->setApplication($this->app);
+        }
     }
 
-    public function buildDriver(array $config)
+    public function register(LaravelDriver $driver): void
     {
-        return new Definition(KernelDriver::class, [ new Reference(BehatExtension::LARAVEL_APP), '%mink.base_url%' ]);
+        $this->drivers[] = $driver;
     }
 }

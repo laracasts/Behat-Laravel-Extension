@@ -1,7 +1,8 @@
 <?php
 
-namespace Laracasts\Behat\Context\Argument;
+namespace Cevinio\Behat\Context\Argument;
 
+use Cevinio\Behat\ServiceContainer\LaravelFactory;
 use ReflectionClass;
 use Illuminate\Contracts\Container\Container;
 use Behat\Behat\Context\Argument\ArgumentResolver;
@@ -9,30 +10,23 @@ use Behat\Behat\Context\Argument\ArgumentResolver;
 class LaravelArgumentResolver implements ArgumentResolver
 {
     /** @var Container */
-    private $container;
+    private $factory;
 
-    public function __construct(Container $container)
+    public function __construct(LaravelFactory $factory)
     {
-        $this->container = $container;
+        $this->factory = $factory;
     }
 
     public function resolveArguments(ReflectionClass $classReflection, array $arguments)
     {
-        $resolvedArguments = [];
+        $app = $this->factory->get();
 
-        foreach ($arguments as $key => $argument) {
-            $resolvedArguments[$key] = $this->resolveArgument($argument);
-        }
+        return array_map(function ($argument) use ($app) {
+            if (true === is_string($argument) && '' !== $argument && '@' === $argument[0]) {
+                return $app->make(substr($argument, 1));
+            }
 
-        return $resolvedArguments;
-    }
-
-    private function resolveArgument($arg)
-    {
-        if (is_string($arg) === true && substr($arg, 0, 1) === '@') {
-            return $this->container->make(substr($arg, 1));
-        }
-
-        return $arg;
+            return $argument;
+        }, $arguments);
     }
 }
