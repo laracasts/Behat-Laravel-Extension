@@ -54,6 +54,8 @@ final class LaravelFactory
 
     public function register(LaravelDriver $driver): void
     {
-        $this->drivers[] = $driver;
+        if (false === in_array($driver, $this->drivers, true)) {
+            $this->drivers[] = $driver;
+        }
     }
 }

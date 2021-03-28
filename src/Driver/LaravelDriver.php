@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\HttpKernelBrowser;
 
 final class LaravelDriver extends BrowserKitDriver
 {
-    private $baseUrl = null;
+    private $baseUrl;
 
     public function __construct(LaravelFactory $factory, $baseUrl = null)
     {

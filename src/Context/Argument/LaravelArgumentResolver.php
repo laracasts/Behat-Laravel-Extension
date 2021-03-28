@@ -4,12 +4,11 @@ namespace Cevinio\Behat\Context\Argument;
 
 use Cevinio\Behat\ServiceContainer\LaravelFactory;
 use ReflectionClass;
-use Illuminate\Contracts\Container\Container;
 use Behat\Behat\Context\Argument\ArgumentResolver;
 
 class LaravelArgumentResolver implements ArgumentResolver
 {
-    /** @var Container */
+    /** @var LaravelFactory */
     private $factory;
 
     public function __construct(LaravelFactory $factory)

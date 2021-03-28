@@ -6,10 +6,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Behat\Testwork\EventDispatcher\Event\SuiteTested;
-use Illuminate\Foundation\Application;
-use Cevinio\Behat\Driver\LaravelDriver;
 use Cevinio\Behat\ServiceContainer\LaravelFactory;
-use Cevinio\Behat\Driver\LaravelDriverFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LaravelAwareInitializer implements EventSubscriberInterface, ContextInitializer

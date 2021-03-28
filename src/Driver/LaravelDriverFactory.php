@@ -3,7 +3,6 @@
 namespace Cevinio\Behat\Driver;
 
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
-use Cevinio\Behat\Driver\LaravelDriver;
 use Cevinio\Behat\ServiceContainer\BehatExtension;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;

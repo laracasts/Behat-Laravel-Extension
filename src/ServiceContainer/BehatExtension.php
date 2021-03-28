@@ -5,7 +5,6 @@ namespace Cevinio\Behat\ServiceContainer;
 use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use Illuminate\Foundation\Application;
 use Cevinio\Behat\Context\LaravelAwareInitializer;
 use Cevinio\Behat\Driver\LaravelDriverFactory;
 use Symfony\Component\DependencyInjection\Definition;
