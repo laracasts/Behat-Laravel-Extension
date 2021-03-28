@@ -20,6 +20,7 @@ final class LaravelDriver extends BrowserKitDriver
         $factory->register($this);
     }
 
+    /** @internal */
     public function setApplication(Application $app): void
     {
         parent::__construct(new HttpKernelBrowser($app), $this->baseUrl);

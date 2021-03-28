@@ -6,7 +6,7 @@ use Cevinio\Behat\ServiceContainer\LaravelFactory;
 use ReflectionClass;
 use Behat\Behat\Context\Argument\ArgumentResolver;
 
-class LaravelArgumentResolver implements ArgumentResolver
+final class LaravelArgumentResolver implements ArgumentResolver
 {
     /** @var LaravelFactory */
     private $factory;

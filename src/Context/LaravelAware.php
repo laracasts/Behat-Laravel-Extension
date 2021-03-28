@@ -12,6 +12,7 @@ trait LaravelAware
 
     /**
      * @see LaravelAwareContext::setLaravelFactory()
+     * @internal
      */
     public function setLaravelFactory(LaravelFactory $factory): void
     {

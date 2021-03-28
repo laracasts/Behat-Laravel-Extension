@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Cevinio\Behat\Driver\LaravelDriver;
 
+/** @internal */
 final class LaravelFactory
 {
     /** @var string */

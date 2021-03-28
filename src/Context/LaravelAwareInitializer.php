@@ -9,7 +9,7 @@ use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use Cevinio\Behat\ServiceContainer\LaravelFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LaravelAwareInitializer implements EventSubscriberInterface, ContextInitializer
+final class LaravelAwareInitializer implements EventSubscriberInterface, ContextInitializer
 {
     /** @var LaravelFactory */
     private $factory;
