@@ -21,7 +21,7 @@ Next, within your project root, create a `behat.yml` file, and add:
 ```
 default:
     extensions:
-        Laracasts\Behat:
+        Cevinio\Behat:
             # env_path: .env.behat
         Behat\MinkExtension:
             default_session: laravel
